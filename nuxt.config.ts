@@ -1,8 +1,10 @@
 // import tailwindcss from "@tailwindcss/vite";
 export default defineNuxtConfig({
-  modules: ['@pinia/nuxt'],
+  modules: ['@pinia/nuxt', '@sentry/nuxt/module'],
   css: ['@/assets/css/tailwind.css'],
-
+  nitro: {
+    preset: 'node',
+  },
   // vite: {
   //   plugins: [tailwindcss()],
   // },
@@ -12,6 +14,15 @@ export default defineNuxtConfig({
       sentryDsn: process.env.SENTRY_DSN || '',
     }
   },
-
   compatibilityDate: '2025-04-13',
+  sentry: {
+    sourceMapsUploadOptions: {
+      org: 'valerii-yg',
+      project: 'javascript-nuxt',
+    },
+  },
+
+  sourcemap: {
+    client: 'hidden',
+  },
 })
