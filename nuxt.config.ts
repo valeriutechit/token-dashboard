@@ -1,32 +1,33 @@
-// import tailwindcss from "@tailwindcss/vite";
 export default defineNuxtConfig({
-  modules: ['@pinia/nuxt', '@sentry/nuxt/module'],
+  modules: ['@pinia/nuxt', '@sentry/nuxt'],
   css: ['@/assets/css/tailwind.css'],
+
+  sentry: {
+    dsn: process.env.SENTRY_DSN,
+    config: {
+      tracesSampleRate: 1.0,
+    },
+    sourceMaps: {
+      enabled: true,
+      authToken: process.env.SENTRY_AUTH_TOKEN,
+      org: 'valerii-yg',
+      project: 'javascript-nuxt',
+    },
+  },
+
   nitro: {
     preset: 'node',
+    serveStatic: true,
   },
-  devServer: {
-    port: process.env.PORT ? Number(process.env.PORT) : 3000,
-    host: '0.0.0.0',
-  },
-  // vite: {
-  //   plugins: [tailwindcss()],
-  // },
+
   runtimeConfig: {
     public: {
       apiBase: process.env.API_BASE || 'http://localhost:3000',
       sentryDsn: process.env.SENTRY_DSN || '',
     }
   },
-  compatibilityDate: '2025-04-13',
-  sentry: {
-    sourceMapsUploadOptions: {
-      org: 'valerii-yg',
-      project: 'javascript-nuxt',
-    },
-  },
 
   sourcemap: {
-    client: 'hidden',
+    client: 'hidden', // чтобы скрывать исходники в браузере
   },
 })
