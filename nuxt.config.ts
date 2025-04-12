@@ -5,6 +5,10 @@ export default defineNuxtConfig({
   nitro: {
     preset: 'node',
   },
+  devServer: {
+    port: process.env.PORT ? Number(process.env.PORT) : 3000,
+    host: '0.0.0.0',
+  },
   // vite: {
   //   plugins: [tailwindcss()],
   // },
