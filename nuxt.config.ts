@@ -4,15 +4,14 @@ export default defineNuxtConfig({
 
   sentry: {
     dsn: process.env.SENTRY_DSN,
-    config: {
-      tracesSampleRate: 1.0,
-    },
+    authToken: process.env.SENTRY_AUTH_TOKEN,
+    org: 'valerii-yg',
+    project: 'javascript-nuxt',
     sourceMaps: {
-      enabled: true,
-      authToken: process.env.SENTRY_AUTH_TOKEN,
-      org: 'valerii-yg',
-      project: 'javascript-nuxt',
+      include: ['./.output'], // default
+      ignore: ['node_modules'],
     },
+    telemetry: false
   },
 
   nitro: {
